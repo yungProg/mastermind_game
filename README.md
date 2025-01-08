@@ -10,3 +10,6 @@ Guessed code is checked if it has the same configuration as secret code
     If a guessed peg is in different position compared to its correspondent, a white peg is appended to the guessed code
     If neither condition passes nothing is appended to the guess code
 Player has 12 guesses. Game ends if he exhausts all the guesses or predict correct code.
+
+red, red, blue, yellow
+green, blue, yellow, yellow
