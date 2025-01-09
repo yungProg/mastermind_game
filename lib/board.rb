@@ -5,7 +5,7 @@ class Board
   PEG_COLORS = %w[yellow orange blue green purple pink].freeze
   HINT_PEGS = %w[red white black].freeze
   def initialize(secret_code)
-    @secret_code = secret_code
+    @secret_code = secret_code.split
     @guess_code = nil
     @hint = []
     @game_board = Array.new(12) { Array.new([%w[X X X X], %w[O O O O]]) }
@@ -33,7 +33,8 @@ class Board
   end
 
   def valid_guess?(guess)
-    guess.length == 4
+    guess = guess.split
+    guess.length == 4 && guess.all? { |guess_peg| PEG_COLORS.include?(guess_peg) }
   end
 
   def board_full?
@@ -41,6 +42,7 @@ class Board
   end
 
   def take_guess(guess)
+    guess = guess.split
     @guess_code = guess
     @game_board[@current_row][0] = guess
   end

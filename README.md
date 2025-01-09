@@ -13,3 +13,6 @@ Player has 12 guesses. Game ends if he exhausts all the guesses or predict corre
 
 red, red, blue, yellow
 green, blue, yellow, yellow
+
+commit:
+    update valid guess check criteria
