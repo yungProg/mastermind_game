@@ -15,14 +15,23 @@ class Game
     @secret_maker.create_secret_code(secret_code)
     loop do
       board.display
-      puts 'Guess code by listing comma separated colors'
-      puts '[yellow, blue, green, orange, pink, brown]'
-      guess_code = gets.chomp
-      @secret_guesser.make_guess(guess_code)
-      board.take_guess(guess_code) if board.valid_guess?(guess_code)
+      loop do
+        puts 'Guess code by listing colors'
+        puts '[yellow, blue, green, orange, pink, brown]'
+        guess_code = gets.chomp
+        @secret_guesser.make_guess(guess_code)
+        if board.valid_guess?(@secret_guesser.retrieve_guess_code)
+          board.take_guess(@secret_guesser.retrieve_guess_code)
+          break
+        end
+      end
       board.check_guess
       board.provide_hint
-      board.declare_winner
+      if board.any_winner?
+        board.display
+        board.declare_winner(@secret_maker.retrieve_name, @secret_guesser.retrieve_name)
+        break
+      end
       board.next_row
     end
   end

@@ -2,7 +2,7 @@
 
 # class representing mastermind board
 class Board
-  PEG_COLORS = %w[yellow orange blue green purple pink].freeze
+  PEG_COLORS = %w[yellow orange blue green purple pink brown].freeze
   HINT_PEGS = %w[red white black].freeze
   def initialize(secret_code)
     @secret_code = secret_code.split
@@ -33,33 +33,35 @@ class Board
   end
 
   def valid_guess?(guess)
-    guess = guess.split
     guess.length == 4 && guess.all? { |guess_peg| PEG_COLORS.include?(guess_peg) }
   end
 
   def board_full?
-    @current_row > 11
+    @current_row == 11
   end
 
   def take_guess(guess)
-    guess = guess.split
     @guess_code = guess
-    @game_board[@current_row][0] = guess
+    @game_board[@current_row][0] = @guess_code
   end
 
   def correct_guess?
-    @guess_code == @secret_code
+    @hint.all?('red')
   end
 
   def next_row
     @current_row += 1 unless board_full?
   end
 
-  def declare_winner
+  def any_winner?
+    correct_guess? || board_full?
+  end
+
+  def declare_winner(player1, player2)
     if board_full?
-      'Player 1 wins'
+      puts "#{player1} wins"
     elsif correct_guess?
-      'Player 2 wins'
+      puts "#{player2} wins"
     end
   end
 

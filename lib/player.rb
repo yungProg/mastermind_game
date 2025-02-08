@@ -15,4 +15,16 @@ class Player
   def make_guess(code)
     @guess_code = code.split
   end
+
+  def retrieve_secret_code
+    @secret_code
+  end
+
+  def retrieve_guess_code
+    @guess_code
+  end
+
+  def retrieve_name
+    @name
+  end
 end
