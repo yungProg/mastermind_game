@@ -16,3 +16,10 @@ green, blue, yellow, yellow
 
 commit:
     update valid guess check criteria
+
+To be done:
+    - validate secret maker's code
+    - add replay option
+    - write computers algorithm to generate secret
+    - write computer's algorithm to guess code
+    - allow human vs human, human vs computer, computer vs human and computer vs computer
