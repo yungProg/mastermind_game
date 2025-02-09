@@ -5,7 +5,7 @@ class Board
   PEG_COLORS = %w[yellow orange blue green purple pink brown].freeze
   HINT_PEGS = %w[red white black].freeze
   def initialize(secret_code)
-    @secret_code = secret_code.split
+    @secret_code = secret_code
     @guess_code = nil
     @hint = []
     @game_board = Array.new(12) { Array.new([%w[X X X X], %w[O O O O]]) }

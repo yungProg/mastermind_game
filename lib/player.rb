@@ -9,11 +9,11 @@ class Player
   end
 
   def create_secret_code(code)
-    @secret_code = code.split
+    @secret_code = code.gsub(/[^a-z]/i, ' ').split
   end
 
   def make_guess(code)
-    @guess_code = code.split
+    @guess_code = code.gsub(/[^a-z]/i, ' ').split
   end
 
   def retrieve_secret_code

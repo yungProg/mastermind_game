@@ -20,6 +20,7 @@ commit:
 To be done:
     - validate secret maker's code
     - add replay option
+    - implement colorize instead of using words
     - write computers algorithm to generate secret
     - write computer's algorithm to guess code
     - allow human vs human, human vs computer, computer vs human and computer vs computer
