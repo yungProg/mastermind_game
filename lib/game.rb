@@ -8,11 +8,15 @@ class Game
   end
 
   def play # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
-    puts 'Create code by listing comma separated colors'
-    puts '[yellow, blue, green, orange, pink, brown]'
-    secret_code = gets.chomp
-    board = Board.new(secret_code)
-    @secret_maker.create_secret_code(secret_code)
+    board = nil
+    loop do
+      puts 'Create code by listing comma separated colors'
+      puts '[yellow, blue, green, orange, pink, brown]'
+      secret_code = gets.chomp
+      @secret_maker.create_secret_code(secret_code)
+      board = Board.new(@secret_maker.retrieve_secret_code)
+      break if board.valid_guess?(@secret_maker.retrieve_secret_code)
+    end
     loop do
       board.display
       loop do
