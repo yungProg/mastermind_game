@@ -39,4 +39,9 @@ class Game
       board.next_row
     end
   end
+
+  def play_again?
+    puts 'Do you want to play again? (yes/no)'
+    gets.chomp
+  end
 end
