@@ -75,11 +75,10 @@ class Board
                           'black'
                         end
     end
-    @hint.shuffle!
   end
 
   def provide_hint
-    @game_board[@current_row][1] = @hint
+    @game_board[@current_row][1] = @hint.shuffle
   end
 end
 

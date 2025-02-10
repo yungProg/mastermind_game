@@ -18,7 +18,7 @@ commit:
     update valid guess check criteria
 
 To be done:
-    - validate secret maker's code
+    - validate secret maker's code ✔
     - add replay option
     - implement colorize instead of using words
     - write computers algorithm to generate secret
