@@ -8,6 +8,7 @@ class Game
   end
 
   def play # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
+    puts 'Welcome to Mastermind!'
     board = nil
     loop do
       puts 'Create code by listing comma separated colors'
