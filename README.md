@@ -24,3 +24,7 @@ To be done:
     - write computers algorithm to generate secret
     - write computer's algorithm to guess code
     - allow human vs human, human vs computer, computer vs human and computer vs computer
+
+Computer guess algo:
+    - predict 4 pegs of same color
+    - replace 
