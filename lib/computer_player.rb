@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 # class representing computer player
+require_relative 'guess'
 class ComputerPlayer
+  include Guess
   def initialize(name)
     @name = name
     @secret_code = []

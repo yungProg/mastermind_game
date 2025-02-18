@@ -80,6 +80,10 @@ class Board
   def provide_hint
     @game_board[@current_row][1] = @hint.shuffle
   end
+
+  def retrieve_hint
+    @hint
+  end
 end
 
 # a = %w[yellow blue red blue]
