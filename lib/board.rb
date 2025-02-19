@@ -63,6 +63,7 @@ class Board
     elsif correct_guess?
       puts "#{player2} wins"
     end
+    puts "The secret code was #{@secret_code}"
   end
 
   def check_guess
