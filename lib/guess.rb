@@ -9,8 +9,8 @@ module Guess
     @guess_code = [random_guess] * 4
   end
 
-  def subsequent_guess
-    counter = retrieve_guess_code.count('black')
+  def subsequent_guess(hint)
+    counter = hint.count('black')
     counter.times do |i|
       @guess_code[i] = PEG_COLORS_COPY[@number_of_guess]
     end
@@ -19,21 +19,21 @@ module Guess
   def arrange_pegs
     loop do |i|
       @guess_code.shuffle!
-      if previous_arrangements.includes?( @guess_code)
+      if @previous_arrangements.include?( @guess_code)
         @previous_arrangements.push( @guess_code)
         break
       end
     end
   end
 
-  def make_guess
-    if @number_of_guess > 0
-      self.first_guess
+  def make_guess(hint)
+    if @number_of_guess < 1
+      first_guess
     else
-      self.subsequent_guess
+      subsequent_guess(hint)
     end
     if retrieve_guess_code.all?('red')
-      self.arrange_pegs
+      arrange_pegs
     end
     @guess_code
   end
