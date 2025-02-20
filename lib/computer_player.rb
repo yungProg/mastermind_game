@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# class representing computer player
 require_relative 'guess'
+# class representing computer player
 class ComputerPlayer
   include Guess
   def initialize(name)

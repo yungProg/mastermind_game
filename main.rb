@@ -17,6 +17,11 @@ player2_type = gets.chomp
 puts 'Enter player 2 name'
 player2_name = gets.chomp
 
-Game.new(PlayerFactory.create_player(player1_type, player1_name), PlayerFactory.create_player(player2_type, player2_name)).play
-Game.new(PlayerFactory.create_player(player1_type, player1_name), PlayerFactory.create_player(player2_type, player2_name)).play while Game.new(PlayerFactory.create_player(player1_type, player1_name), PlayerFactory.create_player(player2_type, player2_name)).play_again?.downcase == 'yes'
+Game.new(PlayerFactory.create_player(player1_type, player1_name),
+         PlayerFactory.create_player(player2_type, player2_name)).play
+Game.new(PlayerFactory.create_player(player1_type, player1_name),
+         PlayerFactory.create_player(player2_type, player2_name)).play while Game.new(
+           PlayerFactory.create_player(player1_type,
+                                       player1_name), PlayerFactory.create_player(player2_type, player2_name)
+         ).play_again?.downcase == 'yes'
 puts 'Thanks for playing!'

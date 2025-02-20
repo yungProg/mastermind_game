@@ -11,7 +11,7 @@ class Game
     board = nil
     loop do
       @secret_maker.create_secret_code
-      #print @secret_maker.create_secret_code
+      # print @secret_maker.create_secret_code
       board = Board.new(@secret_maker.retrieve_secret_code)
       break if board.valid_guess?(@secret_maker.retrieve_secret_code)
     end

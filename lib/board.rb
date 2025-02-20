@@ -2,7 +2,7 @@
 
 # class representing mastermind board
 class Board
-  PEG_COLORS = %w[yellow orange blue green purple pink brown].freeze
+  PEG_COLORS = %w[yellow orange blue green purple brown].freeze
   HINT_PEGS = %w[red white black].freeze
   def initialize(secret_code)
     @secret_code = secret_code
@@ -30,6 +30,7 @@ class Board
       end
       puts
     end
+    puts
   end
 
   def valid_guess?(guess)
@@ -66,16 +67,27 @@ class Board
     puts "The secret code was #{@secret_code}"
   end
 
-  def check_guess
-    @guess_code.each_with_index do |peg, position|
-      @hint[position] = if peg == @secret_code[position]
-                          'red'
-                        elsif @secret_code.include?(peg)
-                          'white'
-                        else
-                          'black'
-                        end
+  def check_guess # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
+    secret_code_clone = @secret_code.dup
+    guess_code_clone = @guess_code.dup
+    exact_matches = 0
+    near_matches = 0
+    guess_code_clone.each_with_index do |color, index|
+      if color == secret_code_clone[index] # rubocop:disable Style/Next
+        exact_matches += 1
+        secret_code_clone[index] = nil
+        guess_code_clone[index] = nil
+      end
     end
+    guess_code_clone.each_with_index do |color, index| # rubocop:disable Style/CombinableLoops,Lint/UnusedBlockArgument
+      next if color.nil?
+
+      if secret_code_clone.include?(color)
+        near_matches += 1
+        secret_code_clone[secret_code_clone.index(color)] = nil
+      end
+    end
+    @hint = [].concat(['red'] * exact_matches, ['white'] * near_matches, ['black'] * (4 - exact_matches - near_matches))
   end
 
   def provide_hint

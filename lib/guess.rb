@@ -2,7 +2,7 @@
 
 # module of how to guess code
 module Guess
-  PEG_COLORS_COPY = %w[yellow orange blue green purple pink brown].shuffle
+  PEG_COLORS_COPY = %w[yellow orange blue green purple brown].shuffle
   def first_guess
     random_guess = PEG_COLORS_COPY[@number_of_guess]
     @number_of_guess += 1
@@ -14,13 +14,15 @@ module Guess
     counter.times do |i|
       @guess_code[i] = PEG_COLORS_COPY[@number_of_guess]
     end
+    @number_of_guess += 1
   end
 
   def arrange_pegs
-    loop do |i|
-      @guess_code.shuffle!
-      if @previous_arrangements.include?( @guess_code)
-        @previous_arrangements.push( @guess_code)
+    loop do
+      c = @guess_code.shuffle.dup
+      unless @previous_arrangements.include?(c) # rubocop:disable Style/Next
+        @previous_arrangements.push(c)
+        @guess_code = c
         break
       end
     end
@@ -32,9 +34,7 @@ module Guess
     else
       subsequent_guess(hint)
     end
-    if retrieve_guess_code.all?('red')
-      arrange_pegs
-    end
+    arrange_pegs if hint.all?('white') || @number_of_guess > 6
     @guess_code
   end
 end
