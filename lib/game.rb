@@ -18,7 +18,7 @@ class Game
     loop do
       board.display
       loop do
-        @secret_guesser.make_guess(board.retrieve_hint)
+        @secret_guesser.make_guess
         if board.valid_guess?(@secret_guesser.retrieve_guess_code)
           board.take_guess(@secret_guesser.retrieve_guess_code)
           break

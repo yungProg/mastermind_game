@@ -32,4 +32,8 @@ class ComputerPlayer
   def retrieve_name
     @name
   end
+
+  def retrieve_hint_c
+    Board.retrieve_hint
+  end
 end

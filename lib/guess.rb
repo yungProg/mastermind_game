@@ -9,8 +9,8 @@ module Guess
     @guess_code = [random_guess] * 4
   end
 
-  def subsequent_guess(hint)
-    counter = hint.count('black')
+  def subsequent_guess
+    counter = Board.retrieve_hint.count('black')
     counter.times do |i|
       @guess_code[i] = PEG_COLORS_COPY[@number_of_guess]
     end
@@ -28,13 +28,13 @@ module Guess
     end
   end
 
-  def make_guess(hint)
+  def make_guess
     if @number_of_guess < 1
       first_guess
     else
-      subsequent_guess(hint)
+      subsequent_guess
     end
-    arrange_pegs if hint.all?('white') || @number_of_guess > 6
+    arrange_pegs if Board.retrieve_hint.all?('white') || @number_of_guess > 6
     @guess_code
   end
 end

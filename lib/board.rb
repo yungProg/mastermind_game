@@ -4,10 +4,10 @@
 class Board
   PEG_COLORS = %w[yellow orange blue green purple brown].freeze
   HINT_PEGS = %w[red white black].freeze
+  @@hint = []
   def initialize(secret_code)
     @secret_code = secret_code
     @guess_code = nil
-    @hint = []
     @game_board = Array.new(12) { Array.new([%w[X X X X], %w[O O O O]]) }
     @current_row = 0
   end
@@ -47,7 +47,7 @@ class Board
   end
 
   def correct_guess?
-    @hint.all?('red')
+    @@hint.all?('red')
   end
 
   def next_row
@@ -59,10 +59,10 @@ class Board
   end
 
   def declare_winner(player1, player2)
-    if board_full?
-      puts "#{player1} wins"
-    elsif correct_guess?
+    if correct_guess?
       puts "#{player2} wins"
+    elsif board_full?
+      puts "#{player1} wins"
     end
     puts "The secret code was #{@secret_code}"
   end
@@ -87,15 +87,16 @@ class Board
         secret_code_clone[secret_code_clone.index(color)] = nil
       end
     end
-    @hint = [].concat(['red'] * exact_matches, ['white'] * near_matches, ['black'] * (4 - exact_matches - near_matches))
+    @@hint = [].concat(['red'] * exact_matches, ['white'] * near_matches,
+                       ['black'] * (4 - exact_matches - near_matches))
   end
 
   def provide_hint
-    @game_board[@current_row][1] = @hint.shuffle
+    @game_board[@current_row][1] = @@hint.shuffle
   end
 
-  def retrieve_hint
-    @hint
+  def self.retrieve_hint
+    @@hint
   end
 end
 
