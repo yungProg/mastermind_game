@@ -2,9 +2,9 @@
 
 # class representing mastermind board
 class Board
-  PEG_COLORS = %w[yellow orange blue green purple brown].freeze
-  HINT_PEGS = %w[red white black].freeze
-  @@hint = []
+  PEG_COLORS = %w[Y O B G P R].freeze
+  HINT_PEGS = %w[W B].freeze
+  @@hint = [] # rubocop:disable Style/ClassVars
   def initialize(secret_code)
     @secret_code = secret_code
     @guess_code = nil
@@ -47,7 +47,7 @@ class Board
   end
 
   def correct_guess?
-    @@hint.all?('red')
+    @@hint.all?('W')
   end
 
   def next_row
@@ -87,8 +87,7 @@ class Board
         secret_code_clone[secret_code_clone.index(color)] = nil
       end
     end
-    @@hint = [].concat(['red'] * exact_matches, ['white'] * near_matches,
-                       ['black'] * (4 - exact_matches - near_matches))
+    @@hint = [].concat(['W'] * exact_matches, ['B'] * near_matches, ['O'] * (4 - exact_matches - near_matches)) # rubocop:disable Style/ClassVars
   end
 
   def provide_hint

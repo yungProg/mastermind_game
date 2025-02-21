@@ -16,11 +16,6 @@ class ComputerPlayer
     @secret_code = Array.new(4) { Board::PEG_COLORS.sample }
   end
 
-  # def make_guess
-  #   @guess_code = Array.new(4) { Board::PEG_COLORS.sample }
-  #   print @guess_code
-  # end
-
   def retrieve_secret_code
     @secret_code
   end
@@ -31,9 +26,5 @@ class ComputerPlayer
 
   def retrieve_name
     @name
-  end
-
-  def retrieve_hint_c
-    Board.retrieve_hint
   end
 end

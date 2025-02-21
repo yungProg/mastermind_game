@@ -2,7 +2,7 @@
 
 # module of how to guess code
 module Guess
-  PEG_COLORS_COPY = %w[yellow orange blue green purple brown].shuffle
+  PEG_COLORS_COPY = %w[Y O B G P R].shuffle
   def first_guess
     random_guess = PEG_COLORS_COPY[@number_of_guess]
     @number_of_guess += 1
@@ -10,7 +10,7 @@ module Guess
   end
 
   def subsequent_guess
-    counter = Board.retrieve_hint.count('black')
+    counter = Board.retrieve_hint.count('O')
     counter.times do |i|
       @guess_code[i] = PEG_COLORS_COPY[@number_of_guess]
     end
@@ -34,7 +34,7 @@ module Guess
     else
       subsequent_guess
     end
-    arrange_pegs if Board.retrieve_hint.all?('white') || @number_of_guess > 6
+    arrange_pegs if Board.retrieve_hint.all?('B') || @number_of_guess > 6
     @guess_code
   end
 end
